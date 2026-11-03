@@ -9,7 +9,7 @@ description: |
   固定行距30磅、首行缩进2字符等）。
 metadata:
   author: lex
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # lex-hj公文排版

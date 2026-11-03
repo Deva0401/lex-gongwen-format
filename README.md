@@ -79,8 +79,6 @@ python3 scripts/validate_skill.py .
 - **字体缺失（macOS/Linux）**：仿宋_GB2312、华文中宋、楷体_GB2312 为 Windows 中易字库，非 Windows 平台需按 `references/font-mapping.md` 安装开源替代字体（朱雀仿宋 / 思源宋体 / 思源黑体 / 霞鹜文楷），或使用 `scripts/docx_format.py --platform` 自动切换。直接硬套 Windows 字体名会导致缺字。
 - **python-docx 未安装**：运行 `scripts/docx_format.py` 前需 `pip install python-docx`；脚本会在依赖缺失时给出明确提示，不会静默失败。
 - **格式未生效**：检查文档是否有手动设置的直接格式覆盖了样式；建议清除手动格式后重新应用样式。
-- **表格行距异常**：表格正文行距为20磅，与正文30磅不同，需单独设置表格样式。
-- **页边距不对**：模板要求上 2.54cm、下 2.54cm、左 3.18cm、右 3.18cm；脚本会自动应用，人工排版在 Word「布局 → 页边距 → 自定义页边距」设置。
 
 ## 来源
 

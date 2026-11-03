@@ -10,10 +10,10 @@
 |---|---|---|---|
 | 正文中文 | 仿宋_GB2312 | 朱雀仿宋 | 朱雀仿宋 |
 | 正文数字/英文 | Times New Roman | Times New Roman | Liberation Serif / Times New Roman |
-| 一级标题（居中大标题） | 华文中宋 | 思源宋体 Bold | 思源宋体 Bold |
-| 二级标题 | 黑体 | 思源黑体 | 思源黑体 |
-| 三级标题 | 楷体_GB2312 | 霞鹜文楷 | 霞鹜文楷 |
-| 四级标题 | 仿宋_GB2312 | 朱雀仿宋 | 朱雀仿宋 |
+| 题目（居中大标题） | 华文中宋 | 思源宋体 Bold | 思源宋体 Bold |
+| 一级标题 | 黑体 | 思源黑体 | 思源黑体 |
+| 二级标题 | 楷体_GB2312 | 霞鹜文楷 | 霞鹜文楷 |
+| 三级标题 | 仿宋_GB2312 | 朱雀仿宋 | 朱雀仿宋 |
 | 表题/图题 | 仿宋_GB2312（小四加粗） | 朱雀仿宋（小四加粗） | 朱雀仿宋（小四加粗） |
 | 架构图字体 | 微软雅黑 | 苹方 / 思源黑体 | 思源黑体 |
 
@@ -28,9 +28,9 @@
 | 用途 | 推荐字体 | 字体族名（Font Family） | 许可 |
 |---|---|---|---|
 | 正文仿宋 | 朱雀仿宋 | Zhuque Fangsong / 朱雀仿宋 | SIL OFL 1.1 |
-| 一级标题宋体 | 思源宋体 | Noto Serif CJK SC | SIL OFL 1.1 |
-| 二级标题黑体 | 思源黑体 | Noto Sans CJK SC | SIL OFL 1.1 |
-| 三级标题楷体 | 霞鹜文楷 | LXGW WenKai | SIL OFL 1.1 |
+| 题目宋体 | 思源宋体 | Noto Serif CJK SC | SIL OFL 1.1 |
+| 一级标题黑体 | 思源黑体 | Noto Sans CJK SC | SIL OFL 1.1 |
+| 二级标题楷体 | 霞鹜文楷 | LXGW WenKai | SIL OFL 1.1 |
 | 架构图 | 思源黑体 / 苹方 | Noto Sans CJK SC / PingFang SC | OFL / 系统自带 |
 
 ### Linux
@@ -38,9 +38,9 @@
 | 用途 | 推荐字体 | 字体族名 | 许可 |
 |---|---|---|---|
 | 正文仿宋 | 朱雀仿宋 | Zhuque Fangsong | SIL OFL 1.1 |
-| 一级标题宋体 | 思源宋体 | Noto Serif CJK SC | SIL OFL 1.1 |
-| 二级标题黑体 | 思源黑体 | Noto Sans CJK SC | SIL OFL 1.1 |
-| 三级标题楷体 | 霞鹜文楷 | LXGW WenKai | SIL OFL 1.1 |
+| 题目宋体 | 思源宋体 | Noto Serif CJK SC | SIL OFL 1.1 |
+| 一级标题黑体 | 思源黑体 | Noto Sans CJK SC | SIL OFL 1.1 |
+| 二级标题楷体 | 霞鹜文楷 | LXGW WenKai | SIL OFL 1.1 |
 | 数字/英文 | Liberation Serif | Liberation Serif | SIL OFL 1.1 |
 
 ## 开源字体下载源（OFL，可免费商用）

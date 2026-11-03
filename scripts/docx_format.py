@@ -3,7 +3,7 @@
 
 按议案模板的视觉格式规范，对一个已存在的 .docx 公文应用全局格式：
 正文仿宋三号、数字英文 Times New Roman、固定行距30磅、首行缩进2字符、
-四级标题字体字号、表格/图题格式等。
+题目及三级标题字体字号、表格/图题格式等。
 
 设计要点：
 1. 内置 python-docx 依赖检测，缺失时给出清晰的安装命令并退出（不静默失败）。
@@ -48,22 +48,22 @@ FONT_MAP = {
         "macos": ("朱雀仿宋", "Times New Roman"),
         "linux": ("朱雀仿宋", "Liberation Serif"),
     },
-    "h1": {  # 一级标题（华文中宋二号加粗居中）
+    "h1": {  # 题目（华文中宋二号加粗居中，无序号总标题）
         "windows": ("华文中宋", "Times New Roman"),
         "macos": ("思源宋体", "Times New Roman"),
         "linux": ("思源宋体", "Liberation Serif"),
     },
-    "h2": {  # 二级标题（黑体三号）
+    "h2": {  # 一级标题（黑体三号）
         "windows": ("黑体", "Times New Roman"),
         "macos": ("思源黑体", "Times New Roman"),
         "linux": ("思源黑体", "Liberation Serif"),
     },
-    "h3": {  # 三级标题（楷体_GB2312三号加粗）
+    "h3": {  # 二级标题（楷体_GB2312三号加粗）
         "windows": ("楷体_GB2312", "Times New Roman"),
         "macos": ("霞鹜文楷", "Times New Roman"),
         "linux": ("霞鹜文楷", "Liberation Serif"),
     },
-    "h4": {  # 四级标题（仿宋_GB2312三号）
+    "h4": {  # 三级标题（仿宋_GB2312三号）
         "windows": ("仿宋_GB2312", "Times New Roman"),
         "macos": ("朱雀仿宋", "Times New Roman"),
         "linux": ("朱雀仿宋", "Liberation Serif"),
@@ -151,36 +151,56 @@ def is_h3(text: str) -> bool:
     return bool(re.match(r"^\d+\.", text))
 
 
-def is_h4(text: str) -> bool:
-    """识别四级标题：（1）（2）……（阿拉伯数字序号）。"""
-    import re
-    return bool(re.match(r"^（\d+）", text))
-
-
 def apply_heading_style(doc, platform_key: str) -> None:
-    """按四级标题规范应用标题格式。由文本前缀识别层级。"""
-    cn_h1, west = FONT_MAP["h1"][platform_key]
-    cn_h2, _ = FONT_MAP["h2"][platform_key]
-    cn_h3, _ = FONT_MAP["h3"][platform_key]
-    cn_h4, _ = FONT_MAP["h4"][platform_key]
+    """按题目及三级标题规范应用标题格式。由文本前缀识别层级。
+
+    层级对应（自上而下）：
+      题目      —— 无序号总标题，华文中宋二号加粗居中
+      一级标题  —— 一、二、三…… 黑体三号
+      二级标题  —— （一）（二）…… 楷体_GB2312三号加粗
+      三级标题  —— 1. 2. 3. …… 仿宋_GB2312三号
+    """
+    cn_title, west = FONT_MAP["h1"][platform_key]  # 题目
+    cn_h1, _ = FONT_MAP["h2"][platform_key]  # 一级标题
+    cn_h2, _ = FONT_MAP["h3"][platform_key]  # 二级标题
+    cn_h3, _ = FONT_MAP["h4"][platform_key]  # 三级标题
 
     for para in doc.paragraphs:
         text = para.text.strip()
         if not text:
             continue
-        if is_h1(text):  # 一、华文中宋二号加粗居中
-            set_paragraph_format(para, cn_h1, west, PT_ER, bold=True)
+        if is_h1(text):  # 一、黑体三号
+            set_paragraph_format(para, cn_h1, west, PT_SAN)
+            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        elif is_h2(text):  # （一）楷体_GB2312三号加粗
+            set_paragraph_format(para, cn_h2, west, PT_SAN, bold=True)
+            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        elif is_h3(text):  # 1. 仿宋_GB2312三号
+            set_paragraph_format(para, cn_h3, west, PT_SAN)
+            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+
+def apply_title_style(doc, platform_key: str) -> None:
+    """应用题目格式（华文中宋二号加粗居中）。
+
+    识别规则：文档首个非空、且不以序号（一、/（一）/1.）开头的段落视为题目。
+    仅处理标题层级之前的最靠前段落，避免误伤正文。
+    """
+    cn_title, west = FONT_MAP["h1"][platform_key]
+    seen_heading = False
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if not text:
+            continue
+        # 一旦遇到序号标题，题目区域结束
+        if is_h1(text) or is_h2(text) or is_h3(text):
+            seen_heading = True
+            continue
+        if not seen_heading:
+            # 题目区域内的非序号段落按题目格式处理
+            set_paragraph_format(para, cn_title, west, PT_ER, bold=True)
             para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
             para.paragraph_format.first_line_indent = Cm(0)
-        elif is_h2(text):  # （一）黑体三号
-            set_paragraph_format(para, cn_h2, west, PT_SAN)
-            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        elif is_h3(text):  # 1. 楷体_GB2312三号加粗
-            set_paragraph_format(para, cn_h3, west, PT_SAN, bold=True)
-            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        elif is_h4(text):  # （1）仿宋_GB2312三号
-            set_paragraph_format(para, cn_h4, west, PT_SAN)
-            para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
 
 def apply_page_margins(doc) -> None:
@@ -193,10 +213,11 @@ def apply_page_margins(doc) -> None:
 
 
 def apply_format(input_path: Path, output_path: Path, platform_key: str) -> None:
-    """对文档应用完整格式（页边距 + 正文 + 标题层级）。"""
+    """对文档应用完整格式（页边距 + 正文 + 题目 + 标题层级）。"""
     doc = Document(str(input_path))
     apply_page_margins(doc)
     apply_body_style(doc, platform_key)
+    apply_title_style(doc, platform_key)
     apply_heading_style(doc, platform_key)
     doc.save(str(output_path))
 

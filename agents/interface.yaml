@@ -5,7 +5,7 @@ interface:
     使用 lex-hj公文排版 技能对公文进行排版或格式校验。严格按照 references/format-spec.md 中的规范执行：
     页边距上2.54cm、下2.54cm、左3.18cm、右3.18cm；
     正文仿宋_GB2312三号、数字英文Times New Roman、固定行距30磅、段前段后0行、首行缩进2字符；
-    一级标题华文中宋二号加粗居中、二级黑体三号、三级楷体_GB2312三号加粗、四级仿宋_GB2312三号；
+    题目华文中宋二号加粗居中、一级标题黑体三号、二级标题楷体_GB2312三号加粗、三级标题仿宋_GB2312三号；
     表题仿宋_GB2312小四加粗置于表上、表格正文仿宋_GB2312小四行距20磅；
     图题仿宋_GB2312小四加粗置于图下、架构图黑色边框微软雅黑且须可编辑不得截图；
     "一是""二是"加粗；数值千位分隔符保留2位小数；全文单位统一万元/亿元。
@@ -38,7 +38,7 @@ compatibility:
   permissions:
     network: "none required"
     file_write: "公文文档文件（.docx等）的排版编辑"
-    subprocess: "lark-doc office-word 模块脚本（docx_edit.py、extract_docx.py等）"
+    subprocess: "内置脚本 scripts/docx_format.py（docx 排版）"
     interactive: "avoid"
   degradation:
     openai: "metadata-adapter"

@@ -37,10 +37,10 @@ npx skills add Deva0401/lex-gongwen-format
 |---|---|
 | 页边距 | 上 2.54cm、下 2.54cm、左 3.18cm、右 3.18cm |
 | 正文 | 仿宋_GB2312 三号，数字英文 Times New Roman，固定行距30磅，首行缩进2字符 |
-| 一级标题 | 华文中宋 二号 加粗 居中 |
-| 二级标题 | 黑体 三号 |
-| 三级标题 | 楷体_GB2312 三号 加粗 |
-| 四级标题 | 仿宋_GB2312 三号 |
+| 题目 | 华文中宋 二号 加粗 居中（无序号总标题） |
+| 一级标题 | 黑体 三号 |
+| 二级标题 | 楷体_GB2312 三号 加粗 |
+| 三级标题 | 仿宋_GB2312 三号 |
 | 表题 | 仿宋_GB2312 小四 加粗（表上） |
 | 表格正文 | 仿宋_GB2312 小四，行距20磅 |
 | 图题 | 仿宋_GB2312 小四 加粗（图下） |
@@ -55,9 +55,9 @@ Windows 使用中易字库（仿宋_GB2312 / 华文中宋 / 楷体_GB2312），�
 | 用途 | Windows | macOS / Linux |
 |---|---|---|
 | 正文仿宋 | 仿宋_GB2312 | 朱雀仿宋（Zhuque Fangsong） |
-| 一级标题宋体 | 华文中宋 | 思源宋体（Noto Serif CJK SC） |
-| 二级标题黑体 | 黑体 | 思源黑体（Noto Sans CJK SC） |
-| 三级标题楷体 | 楷体_GB2312 | 霞鹜文楷（LXGW WenKai） |
+| 题目宋体 | 华文中宋 | 思源宋体（Noto Serif CJK SC） |
+| 一级标题黑体 | 黑体 | 思源黑体（Noto Sans CJK SC） |
+| 二级标题楷体 | 楷体_GB2312 | 霞鹜文楷（LXGW WenKai） |
 
 完整映射与下载源见 `references/font-mapping.md`。内置脚本 `scripts/docx_format.py` 会自动按平台选择字体。
 

@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0.0-qiaomu-lite",
+  "generated_at": "2026-11-03",
+  "package": {
+    "name": "lex-hj公文排版",
+    "version": "1.1.1",
+    "owner": "lex",
+    "maturity_tier": "scaffold",
+    "lifecycle_stage": "scaffold",
+    "upstream_inspiration": null,
+    "upstream_sync": {}
+  },
+  "intent": {
+    "description": "国企/体制内公文排版格式化技能，适用于股权投资议案、请示、报告、会议材料等公文的排版与格式校验。\n当用户要求对公文进行排版、格式化、调整字体字号行距、设置标题层级、规范表格与图片样式、\n检查公文格式合规性，或提到\"议案排版\"\"公文格式\"\"仿宋_GB2312\"\"华文中宋标题\"等需求时使用。\n内置议案模板的视觉格式标准（正文仿宋_GB2312三号、一级标题华文中宋二号加粗居中、\n二级黑体三号、三级楷体_GB2312三号加粗、固定行距30磅、首行缩进2字符等）。\n",
+    "job_to_be_done": "国企/体制内公文排版格式化技能，适用于股权投资议案、请示、报告、会议材料等公文的排版与格式校验。\n当用户要求对公文进行排版、格式化、调整字体字号行距、设置标题层级、规范表格与图片样式、\n检查公文格式合规性，或提到\"议案排版\"\"公文格式\"\"仿宋_GB2312\"\"华文中宋标题\"等需求时使用。\n内置议案模板的视觉格式标准（正文仿宋_GB2312三号、一级标题华文中宋二号加粗居中、\n二级黑体三号、三级楷体_GB2312三号加粗、固定行距30磅、首行缩进2字符等）。\n",
+    "target_users": [
+      "Qiaomu operator"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "exclusions": [],
+    "qiaomu_defaults": {}
+  },
+  "triggers": {
+    "should_trigger": [
+      "把这份投资议案排版成规范的公文格式",
+      "检查一下这份请示的字体字号行距是否符合公文要求",
+      "正文用仿宋_GB2312三号，标题用华文中宋二号加粗居中",
+      "公文里的表格和图注格式帮我统一一下",
+      "这份上会材料的标题层级格式对不对，有没有跳级"
+    ],
+    "should_not_trigger": [
+      "帮我写一份投资议案的正文内容",
+      "帮我排版一份简历",
+      "把这个 PPT 的字体字号调整一下"
+    ],
+    "near_neighbor": [
+      "帮我校对一下这份报告里的错别字",
+      "把这段文字润色得更正式一些"
+    ]
+  },
+  "workflow": {
+    "router_rules": [],
+    "compact_workflow": [],
+    "gate_ladder": [],
+    "output_contract": []
+  },
+  "resources": {
+    "references": [
+      "references\\font-mapping.md",
+      "references\\format-spec.md"
+    ],
+    "scripts": [
+      "scripts\\docx_format.py"
+    ],
+    "evals": [
+      "evals\\trigger_cases.json"
+    ],
+    "reports": [
+      "reports\\skill-ir.json",
+      "reports\\trigger-eval.json"
+    ]
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "adapter_targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible"
+    ],
+    "activation": {
+      "mode": "manual",
+      "paths": []
+    },
+    "execution": {
+      "context": "inline",
+      "shell": "bash"
+    },
+    "trust": {
+      "source_tier": "local",
+      "remote_inline_execution": "forbid",
+      "remote_metadata_policy": "allow catalog metadata and read-only source review; forbid unreviewed execution",
+      "generated_public_claims": "evidence-bound"
+    },
+    "permissions": {
+      "network": "none required",
+      "file_write": "公文文档文件（.docx等）的排版编辑",
+      "subprocess": "lark-doc office-word 模块脚本（docx_edit.py、extract_docx.py等）",
+      "interactive": "avoid"
+    },
+    "degradation": {
+      "openai": "metadata-adapter",
+      "claude": "neutral-source-plus-adapter",
+      "generic": "neutral-source",
+      "agent-skills-compatible": "canonical-source"
+    }
+  },
+  "gates": {
+    "scaffold": [
+      "SKILL.md frontmatter",
+      "README hook and natural trigger examples",
+      "clear exclusions"
+    ]
+  },
+  "evidence_boundary": {
+    "generated_reports_are_evidence": true,
+    "planned_work_is_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what local validation, install proof, human review, or provider-backed evidence actually supports"
+  }
+}

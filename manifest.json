@@ -1,0 +1,22 @@
+{
+  "name": "lex-hj公文排版",
+  "version": "1.1.1",
+  "owner": "lex",
+  "updated_at": "2026-11-03",
+  "status": "active",
+  "maturity_tier": "scaffold",
+  "lifecycle_stage": "scaffold",
+  "context_budget_tier": "scaffold",
+  "source": "股权投资议案模板视觉格式规范",
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible"
+  ],
+  "release_gates": [
+    "frontmatter_validation",
+    "root_entrypoint_isolation",
+    "format_spec_completeness"
+  ]
+}

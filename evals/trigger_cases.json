@@ -1,0 +1,69 @@
+{
+  "positive_concepts": {
+    "gongwen_doc": ["公文", "议案", "请示", "报告", "上会材料", "会议材料"],
+    "format_action": ["排版", "格式化", "调整字体", "字体字号", "行距", "缩进", "对齐", "标题层级", "规范", "格式"],
+    "format_detail": ["仿宋_GB2312", "华文中宋", "黑体", "楷体", "表题", "图题", "表格", "架构图"],
+    "compliance": ["合规", "校验", "检查", "是否符合", "格式要求"]
+  },
+  "negative_patterns": [
+    "写一份",
+    "撰写",
+    "润色",
+    "校对",
+    "错别字",
+    "简历",
+    "ppt",
+    "幻灯片",
+    "excel",
+    "营销文案",
+    "论文"
+  ],
+  "recommended_threshold": 0.25,
+  "description_required_concepts": ["gongwen_doc", "format_action"],
+  "should_trigger": [
+    {
+      "text": "把这份投资议案排版成规范的公文格式",
+      "family": "format"
+    },
+    {
+      "text": "检查一下这份请示的字体字号行距是否符合公文要求",
+      "family": "compliance"
+    },
+    {
+      "text": "正文用仿宋_GB2312三号，标题用华文中宋二号加粗居中",
+      "family": "keyword"
+    },
+    {
+      "text": "公文里的表格和图注格式帮我统一一下",
+      "family": "table-figure"
+    },
+    {
+      "text": "这份上会材料的标题层级格式对不对，有没有跳级",
+      "family": "heading-level"
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "帮我写一份投资议案的正文内容",
+      "family": "content-writing"
+    },
+    {
+      "text": "帮我排版一份简历",
+      "family": "non-gongwen"
+    },
+    {
+      "text": "把这个 PPT 的字体字号调整一下",
+      "family": "ppt"
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "帮我校对一下这份报告里的错别字",
+      "family": "proofread"
+    },
+    {
+      "text": "把这段文字润色得更正式一些",
+      "family": "polish"
+    }
+  ]
+}

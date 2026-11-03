@@ -1,0 +1,52 @@
+interface:
+  display_name: "lex-hj公文排版"
+  short_description: "国企/体制内公文排版格式化，内置议案模板视觉格式标准"
+  default_prompt: |
+    使用 lex-hj公文排版 技能对公文进行排版或格式校验。严格按照 references/format-spec.md 中的规范执行：
+    页边距上2.54cm、下2.54cm、左3.18cm、右3.18cm；
+    正文仿宋_GB2312三号、数字英文Times New Roman、固定行距30磅、段前段后0行、首行缩进2字符；
+    一级标题华文中宋二号加粗居中、二级黑体三号、三级楷体_GB2312三号加粗、四级仿宋_GB2312三号；
+    表题仿宋_GB2312小四加粗置于表上、表格正文仿宋_GB2312小四行距20磅；
+    图题仿宋_GB2312小四加粗置于图下、架构图黑色边框微软雅黑且须可编辑不得截图；
+    "一是""二是"加粗；数值千位分隔符保留2位小数；全文单位统一万元/亿元。
+    处理本地docx时优先使用内置脚本 scripts/docx_format.py（自包含、含依赖检测与跨平台字体选择），
+    非Windows平台字体按 references/font-mapping.md 映射选择开源字体；完成后逐项对照检查清单核查。
+  examples:
+    - "把这份议案排版成规范的公文格式"
+    - "检查一下这份文档的字体字号行距是否符合公文要求"
+    - "按议案模板的格式调整这个文档"
+    - "公文里的表格和图注格式帮我统一一下"
+    - "这份请示的标题层级格式对不对"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "agent-skills-compatible"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow catalog metadata and read-only source review; forbid unreviewed execution"
+    generated_public_claims: "evidence-bound"
+  permissions:
+    network: "none required"
+    file_write: "公文文档文件（.docx等）的排版编辑"
+    subprocess: "lark-doc office-word 模块脚本（docx_edit.py、extract_docx.py等）"
+    interactive: "avoid"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    agent-skills-compatible: "canonical-source"
+gates:
+  scaffold:
+    - "SKILL.md frontmatter"
+    - "README hook and natural trigger examples"
+    - "clear exclusions"

@@ -1,0 +1,151 @@
+{
+  "ok": true,
+  "threshold": 0.25,
+  "description_concepts": [
+    "compliance",
+    "format_action",
+    "format_detail",
+    "gongwen_doc"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "把这份投资议案排版成规范的公文格式",
+        "family": "format",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "format_action",
+          "gongwen_doc"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "检查一下这份请示的字体字号行距是否符合公文要求",
+        "family": "compliance",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "compliance",
+          "format_action",
+          "gongwen_doc"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "正文用仿宋_GB2312三号，标题用华文中宋二号加粗居中",
+        "family": "keyword",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "format_detail"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "公文里的表格和图注格式帮我统一一下",
+        "family": "table-figure",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "format_action",
+          "format_detail",
+          "gongwen_doc"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "这份上会材料的标题层级格式对不对，有没有跳级",
+        "family": "heading-level",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "format_action",
+          "gongwen_doc"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "帮我写一份投资议案的正文内容",
+        "family": "content-writing",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "gongwen_doc"
+        ],
+        "negative_pattern": "写一份"
+      },
+      {
+        "prompt": "帮我排版一份简历",
+        "family": "non-gongwen",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "format_action"
+        ],
+        "negative_pattern": "简历"
+      },
+      {
+        "prompt": "把这个 PPT 的字体字号调整一下",
+        "family": "ppt",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "format_action"
+        ],
+        "negative_pattern": "ppt"
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "帮我校对一下这份报告里的错别字",
+        "family": "proofread",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "gongwen_doc"
+        ],
+        "negative_pattern": "校对"
+      },
+      {
+        "prompt": "把这段文字润色得更正式一些",
+        "family": "polish",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "润色"
+      }
+    ]
+  }
+}
